@@ -1,2 +1,9 @@
 # PrefixFreeCodes
-Implementation of Algorithms to Compute Optimal Prefix Free Codes (and Variants)
+Implementation of Algorithms to Compute Optimal Prefix Free Codes (and Variants), and of programs to evaluate their relative performances.
+
+* Objectives
+  1. Algorithms to generate datasets relative to text and image compression via Optimal Prefix Free Codes
+  2. Standard Algorithms of computation of optimal prefix free codes
+  3. At least one new algorithm of computation of optimal prefix free codes.
+  
+* Prospective Calendar
