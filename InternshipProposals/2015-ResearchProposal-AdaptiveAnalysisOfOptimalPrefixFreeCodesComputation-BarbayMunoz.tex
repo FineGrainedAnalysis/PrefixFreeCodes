@@ -1,0 +1,272 @@
+\documentclass{llncs}
+\usepackage[T1]{fontenc}
+\usepackage{times} % Specify font, especially when using ps2pdf after.
+\usepackage{pifont}
+\usepackage{epsfig}
+\usepackage{algorithmic}%% For the Algorithms.
+\usepackage{algorithm} %% For the floating Algorithm environment.
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage[sort]{natbib} % To have the references sorted in good order.
+\usepackage{fullpage}
+\usepackage{jeremy}
+\usepackage{versions}
+\excludeversion{INUTILE}
+\includeversion{LONG}
+\excludeversion{VLONG}
+
+% NOTATIONS
+\providecommand{\id}[1]{\ensuremath{\mathit{#1}}}
+\let\idit=\id
+\providecommand{\idbf}[1]{\ensuremath{\mathbf{#1}}}
+\providecommand{\idrm}[1]{\ensuremath{\mathrm{#1}}}
+\providecommand{\idtt}[1]{\ensuremath{\mathtt{#1}}}
+\providecommand{\idsf}[1]{\ensuremath{\mathsf{#1}}}
+\providecommand{\idcal}[1]{\ensuremath{\mathcal{#1}}}  % Use with capital letter args only
+% 
+%\providecommand{\keypoint}[1]{\textbf{#1}} 
+\providecommand{\keypoint}[1]{{#1}} 
+%
+\providecommand{\llg}{\ensuremath{\log_2\log_2}}
+\providecommand{\etal}{~\emph{et al.}}
+\providecommand{\Oh}{\ensuremath{{\cal O}}}
+\providecommand{\entropy}{{\ensuremath\cal H}}
+% 
+\providecommand{\redundancy}{{\ensuremath \cal R}}
+%\providecommand{\wordSize}{{\ensuremath w}}
+\providecommand{\inputSize}{{\ensuremath N}}
+\providecommand{\alphabetSize}{{\ensuremath k}}
+\providecommand{\nbMessages}{{\ensuremath |T|}}
+\providecommand{\nbWeights}{{\ensuremath N}}
+\providecommand{\nbClusters}{\delta}
+\providecommand{\nbDistinctWeights}{r}
+\providecommand{\distribution}{{\ensuremath \Delta}}
+\providecommand{\weightVector}{{\ensuremath W}}
+\providecommand{\weight}[1]{{\ensuremath W[#1]}}
+\providecommand{\weightVar}{{\ensuremath x}}
+\providecommand{\sumWeights}{{\ensuremath U}}
+\providecommand{\nbSymbols}{{\ensuremath D}}
+\providecommand{\codeLength}[1]{{\ensuremath L[#1]}}
+%\providecommand{\codeLength}[1]{{\ensuremath l_{#1}}}
+\providecommand{\nbPages}{{\ensuremath n}}
+\providecommand{\nbCodeLengths}{{\ensuremath k}}
+\providecommand{\minimalNbCodeLengths}{{\ensuremath \kappa}}
+\providecommand{\partialSum}{{\ensuremath S}}
+\providecommand{\rankVar}{{\ensuremath\rho}}
+% 
+\providecommand{\median}{{\ensuremath\idtt{median}}}
+\providecommand{\select}{{\ensuremath\idtt{select}}}
+\providecommand{\partition}{{\ensuremath\idtt{Partition}}}
+\providecommand{\rank}{{\ensuremath\idtt{rank}}}
+\providecommand{\offset}{{\ensuremath\idtt{offset}}}
+\providecommand{\size}{{\ensuremath\idtt{size}}}
+% \providecommand{\logValue}{{\ensuremath e}}
+% \providecommand{\clusterSize}{{\ensuremath c}}
+% \providecommand{\nbClusters}{{\ensuremath d}}
+% Variables for proof of CloseWeightCloseLength
+\providecommand{\MinWeight}{{\ensuremath\idtt{min}}}
+\providecommand{\MaxWeight}{{\ensuremath\idtt{max}}}
+% Variables for Log Sort
+\providecommand{\LogSort}{{\ensuremath\idtt{LogSort}}}
+\providecommand{\LogArray}{{\ensuremath\idtt{LIP}}}
+% Variables for TopDown
+\providecommand{\TopDown}{{\ensuremath\idtt{TopDown}}}
+\providecommand{\DAryTopDown}{{\ensuremath\idtt{DAryTopDown}}}
+\providecommand{\CodeLengthVariation}{{\ensuremath\idtt{Variation}}}
+\providecommand{\NbWeights}{{\ensuremath\idtt{NbWeights}}}
+\providecommand{\NbClusters}{{\ensuremath\idtt{NbClusters}}} 
+\providecommand{\NbRoots}{{\ensuremath\idtt{NbRoots}}}
+\providecommand{\NbTuples}{{\ensuremath\idtt{NbTuples}}}
+\providecommand{\NbSymbols}{{\ensuremath\idtt{NbSymb}}}
+\providecommand{\MinCodeLength}{{\ensuremath\idtt{MinLen}}}
+\providecommand{\SplittingPoint}{{\ensuremath\idtt{SplitPoint}}}
+\providecommand{\ClusterSize}{{\ensuremath\idtt{ClSize}}}
+\providecommand{\MaxNbNodes}{{\ensuremath\idtt{MaxNbNodes}}}
+\providecommand{\MinLeafWeight}{{\ensuremath\idtt{MinLeaf}}} % \idtt{MinLeafWeight}}}
+\providecommand{\SumWeightsNodes}{{\ensuremath\idtt{SumWeights}}} %\idtt{SumWeightsNodes}}}
+\providecommand{\ClusterStart}{{\ensuremath\idtt{ClStart}}}
+\providecommand{\ClusterThreshold}{{\ensuremath\idtt{ClThreshold}}}
+\providecommand{\NbPairs}{{\ensuremath\idtt{NbPairs}}}
+\providecommand{\PartialSum}{{\ensuremath\idtt{PartialSum}}}
+\providecommand{\toto}{{\ensuremath\idtt{}}}
+\providecommand{\lengthBound}{{\ensuremath B}}
+
+% Always aknowledge sources and pointers and proof readers
+\newenvironment{acknowledgments}{\vspace{.4cm}{\noindent \em Acknowledgements:}}{}%
+
+\begin{document}
+
+\pagestyle{headings}  % switches on printing of running heads
+\addtocmark{                    }
+
+\mainmatter              % start of the contributions
+\title{ {\small Research Proposal:} \\ \emph{Adaptive Analysis of \\ Optimal Prefix Free Codes' \\ Computation}  }
+\titlerunning{ Adaptive Optimal Prefix Free Codes  } 
+%
+\author{J\'er\'emy Barbay \and David Mu{\~n}oz}
+\authorrunning{J\'er\'emy Barbay \and David Mu{\~n}oz}   % abbreviated author list (for running head)
+%
+%%%% modified list of authors for the TOC (add the affiliations)
+\tocauthor{J\'er\'emy Barbay, David Mu{\~n}oz (Universdad de Chile)}
+%
+\institute{
+%
+  Departmento de Ciencias de la Computaci{\'o}n, \\
+  University of Chile,\\
+  \email{jeremy@barbay.cl},\\
+  \email{david.munoz@ug.uchile.cl}
+}
+
+\maketitle              % typeset the title of the contribution
+
+\begin{abstract}
+We propose to study algorithms computing optimal prefix free codes from $N$ unordered positive integer weights in the comparison model, so that to improve on large family of instances over the state of the art complexities of $O(N\lg N)$ in the algebraic decision tree model for the computation of Huffman's codes, a landmark in compression and coding since 1952.
+\end{abstract}
+
+
+\begin{center}
+  \begin{minipage}{.9\textwidth}
+    \noindent{\bf Keywords:} % (One per line)
+    Counting Sort, 
+    Huffman Code,
+    Minimal Redundancy,
+    Optimal Prefix Free Code. 
+\end{minipage}
+\end{center}
+
+
+\subsection*{Definition of the Problem}
+
+Given $\nbWeights$ positive integer weights $\weight{1..\nbWeights}$ coding\begin{VLONG}\footnote{We note $[i..j]=\{i,i+1,\ldots,j\}$ the integer range from $i$ to $j$, and $A[i..j]=\{A[i],A[i+1],\ldots,A[j]\}$ the set of values of an array $A$ which indices occupy this range.}\end{VLONG} for the frequencies $\left\{{\weight{i}}/{\sum_{j=1}^\nbWeights\weight{j}}\right\}_{i\in[1..\nbWeights]}$ of $\nbWeights$ messages\begin{VLONG}\footnote{Huffman~\cite{1952-IRE-AMethodForTheInstructionOfMinimumRedundancyCodes-Huffman} introduced the terminology of \emph{messages} as input and \emph{symbols} as output, which should not be confused with the terminology of \emph{input symbols}, \emph{letters} or \emph{words} for the input and \emph{output symbols} or \emph{bits} in the binary case.}\end{VLONG}, and a number $\nbSymbols$ of output symbols,
+%
+an \emph{Optimal Prefix Free Code}~\cite{1952-IRE-AMethodForTheInstructionOfMinimumRedundancyCodes-Huffman} is a set of $\nbWeights$ code strings on alphabet $[1..\nbSymbols]$, of variable lengths $\codeLength{1..\nbWeights}$ and such that no string is prefix of another, and the average length of a code is minimized (i.e. $\sum_{i=1}^\nbWeights\codeLength{i}\weight{i}$ is minimal).
+%
+\begin{LONG}
+The particularity of such codes is that even though the code strings assigned to the messages can differ in lengths (assigning shorter ones to more frequent messages yields compression to $\sum_{i=1}^\nbWeights\codeLength{i}\weight{i}$ output symbols), the prefix free property insures a non-ambiguous decoding.
+\end{LONG}
+%
+\begin{LONG}
+%%% Relevance
+Such optimal codes, known since
+1952~\cite{1952-IRE-AMethodForTheInstructionOfMinimumRedundancyCodes-Huffman},
+are used in ``\emph{all the mainstream compression  formats}''~\cite{2006-IEEE-LowPowerHuffmanCodingForHighPerformanceDataTransmission-Chen}
+(e.g.  \texttt{PNG}, \texttt{JPEG}, \texttt{MP3}, \texttt{MPEG}, \texttt{GZIP} and \texttt{PKZIP}).
+%
+The concept is ``\emph{one of the {fundamental ideas that people} in computer science and data communications {are using all the time}}'' (Knuth~\cite{2010-BOOK-DiscreteMathematics-Chandrasekaran}), and ``\emph{one of the {enduring techniques of data compression}. It was used in the venerable PACK compression program, authored by Szymanski in 1978, and {remains no less popular today}}'' (Moffat \etal~\cite{1997-IEEE-OnTheImplementstionOfMinimumRedundsncyPrefixCodes-MoffatTurpin} in 1997).
+\end{LONG}
+
+\subsection*{Existing Solutions}
+\label{stateOfTheArt}
+
+Any prefix free code can be computed in linear time from a set of code lengths satisfying the Kraft inequality $\sum_{i=1}^\nbWeights\nbSymbols^{-\codeLength{i}}\leq1$.
+%% Huffman
+The original description of the code by Huffman~\cite{1952-IRE-AMethodForTheInstructionOfMinimumRedundancyCodes-Huffman} yields a heap-based algorithm performing $\Oh(\nbWeights\log\nbWeights)$ algebraic operations, using the bijection between $\nbSymbols$-ary prefix free codes and $\nbSymbols$-ary cardinal trees.
+% Lower Bound in the Algebraic model
+This complexity is asymptotically optimal for any constant value of $\nbSymbols$ in the algebraic decision tree model, in the worst case over instances composed of $\nbWeights$ positive integer weights, as computing the optimal binary prefix free code for the weights 
+$\weight{0,\ldots,\nbSymbols\nbWeights}=\{\nbSymbols^{x_1},\ldots,\nbSymbols^{x_1},\nbSymbols^{x_2},\ldots,\nbSymbols^{x_2},\ldots,\nbSymbols^{x_\nbWeights},\ldots,\nbSymbols^{x_\nbWeights}\}$ is equivalent to sorting the positive integers $\{x_1,\ldots,x_\nbWeights\}$.
+
+\pagebreak[3]
+Two types of results go beyond this lower bound on the computational complexity of algebraic algorithms computing binary prefix free codes:
+%% van Leeuwen
+\begin{enumerate}
+\item van Leeuwen described a reduction in $\Oh(\nbWeights)$ algebraic operations~\cite{1976-ICALP-OnTheConstructionOfHuffmanTrees-Leeuwen} to sorting the weights (i.e. the converse to the lower bound described above),
+%% Han
+which yields solutions of complexity $\Oh(\nbWeights\log\log\nbWeights)$ in the worst case~\cite{2002-STOC-DeterministicSortingInOnlglgnTimeAndLinearSpace-Han,2004-JoA-DeterministicSortingInONLgLgNTimeAndLinearSpace-Han} and $\Oh(\nbWeights\sqrt{\log\log\nbWeights})$ in the average case~\cite{2012-FOCS-IntegerSrtingInNSqrtLgLgNExpectedTimeAndLinearSpace-HanThorup} when sorting the weights using non algebraic operations\begin{LONG} (see Table~\ref{tab:sortedWeightsPreviousResults} for a partial list of results from sorted weights)\end{LONG}.
+\item % Belal et al.
+Belal \etal~\cite{2006-STACS-DistributionSensitiveConstructionOfMinimumRedundancyPrefixCodes-BelalElmasry} described an algorithm claimed to perform $\Oh(\nbCodeLengths\nbWeights)$ algebraic operations for the unsorted case, in the worst case over instances formed by $\nbWeights$ weights and for which there is an optimal binary prefix free code with $\nbCodeLengths$ distinct code lengths\footnote{Note that $k$ is not uniquely defined, as for a given set of weights there can exist several optimal prefix free codes varying in the number of distinct code lengths used.}\begin{LONG} (see Table~\ref{tab:unsortedWeightsPreviousResults} for a partial list of results from unsorted weights)\end{LONG}.
+\end{enumerate}
+%
+\begin{LONG}
+\begin{table}
+\centering
+\begin{tabular}{cp{4cm}p{4cm}p{2.5cm}p{1cm}p{3.5cm}}
+Year & Name                  & Time                          & Space              & Ref.                                                                                                                              & Note        \\
+\hline
+1976 & van Leeuwen           & $O(N)$                        & $O(N)$             & \cite{1976-ICALP-OnTheConstructionOfHuffmanTrees-Leeuwen}                                                                         & \\
+\hline
+1995 & Moffat and Katajainen & $O(N)$                        & $O(1)$             & \cite{1995-WADAS-InPlaceCalculationOfMinimumRedundancyCodes-MoffatKatajainen}                                                     & \\
+\hline
+1998 & Moffat and Turpin     & $O(r(1+\log(N/r)))$           & "space efficient"  & \cite{1998-TIT-EfficientConstructionOfMinimumRedundancyCodesForLargeAlphabets-MoffatTurpin}                                       & outputs run lengths \\
+\hline
+2001 & Fast Lazy Huffman     & $O(N)$                        & $O(\min\{H^2,N\})$ & \cite{2001-IEEE-ThreeSpaceEconomicalAlgorithmsForCalculatingMinimumRedundancyPrefixCodes-MilidiuPessoaLaber}                      & outputs run lengths \\
+2001 & Economic Lazy Huffman & $O(N(1+\log(N/H)))$           & $O(H)$             & \cite{2001-IEEE-ThreeSpaceEconomicalAlgorithmsForCalculatingMinimumRedundancyPrefixCodes-MilidiuPessoaLaber}                      & outputs run lengths \\
+2001 & Best Lazy Huffman     & $O(N)$                        & $O(H)$             & \cite{2001-IEEE-ThreeSpaceEconomicalAlgorithmsForCalculatingMinimumRedundancyPrefixCodes-MilidiuPessoaLaber}                      & outputs run lengths \\
+\hline
+2006 & Belal and Elmasry     & $O(\log^{2k-1} N)$            &                    & \cite{2006-STACS-DistributionSensitiveConstructionOfMinimumRedundancyPrefixCodes-BelalElmasry}                                    & proof not clear \\
+\hline
+\end{tabular}
+\caption{A selection of results on the computational complexity of optimal prefix free codes from sorted weights. $H$ denotes the lenght of the longest prefix free code produced. 
+\label{tab:sortedWeightsPreviousResults}}
+\end{table}
+%
+\begin{table}
+\centering
+\begin{tabular}{cp{4cm}p{4cm}p{2.5cm}p{1cm}p{3.5cm}}
+Year & Name                  & Time                          & Space              & Ref.                                                                                                                              & Note                      \\ \hline
+1952 & Huffman               & $O(N\log N)$                  & $O(N)$             & \cite{1952-IRE-AMethodForTheInstructionOfMinimumRedundancyCodes-Huffman}                                                          & original                  \\ \hline
+2002 & Han                   & $O(N\lg\lg N)$                & $O(N)$             & \cite{2002-STOC-DeterministicSortingInOnlglgnTimeAndLinearSpace-Han,2004-JoA-DeterministicSortingInONLgLgNTimeAndLinearSpace-Han} & integer sorting           \\ \hline
+2006 & Belal and Elmasry     & $O(kN)$ claimed               & $O(N)$             & \cite{2006-STACS-DistributionSensitiveConstructionOfMinimumRedundancyPrefixCodes-BelalElmasry}                                    & $k$ distinct code lengths \\
+2006 & Belal and Elmasry     & $O(16^kN)$ proved             & $O(N)$             & \cite{2005-ARXIV-DistributionSensitiveConstructionOfMinimumRedundancyPrefixCodes-BelalElmasry}                                    & $k$ distinct code lengths \\ \hline
+2012 & Integer Sorting       & $O(N\sqrt{\lg\lg N})$ average & $O(N)$             & \cite{2012-FOCS-IntegerSrtingInNSqrtLgLgNExpectedTimeAndLinearSpace-HanThorup}                                                    & randomized int sorting    \\
+\end{tabular}
+\caption{A selection of results on the computational complexity of optimal prefix free codes from unsorted weights.  $k$ is the number of distinct codelenghts produced.}
+\label{tab:unsortedWeightsPreviousResults}
+\end{table}
+\end{LONG}
+
+Note that there can be various optimal codes for any given set of weights, each with distinct maximal code length $H$ or number of distinct code lengths $k$
+
+\subsection*{Hypothesis}
+\label{sec:hypothesis}
+Given $\nbWeights$ positive integer weights, can we compute an optimal binary prefix free code in time better than
+\begin{enumerate}
+\item  $\Oh(\nbWeights\log\nbWeights)$ for some large classes of instances, even when all the weights are distinct, or better than
+\item $O(16^\nbCodeLengths\nbWeights)$ when the code computed by Huffman's solution has $\nbCodeLengths$ distinct code lengths?
+\end{enumerate}
+
+\subsection*{Objectives}
+The objectives of this internship will be three-fold:
+\begin{enumerate}
+\item Survey the existing solutions to compute optimal prefix free codes;
+\item Define a ``certificate'' data structure for the computation of an optimal prefix free codes, which can be quickly checked when a small subset of the weights change, in order to assert the optimality of the prefix free code previously returned on the new instance;
+\item Define a fine analysis of the computation of optimal prefix free code based on the size of this certificate, knowing that this size will be so large in the worst case as to force a complexity within $\Oh(\nbWeights\log\nbWeights)$, but with the hope that this size is small in many other cases, and yields faster algorithms on such instances.
+\end{enumerate}
+
+
+%%%%%%%%  BIBLIO  %%%%%%%%%%%%
+%\newpage
+\bibliographystyle{abbrv}
+% unsrt to have [1]unsorted, plain to have [1] sorted, alpha to have something horrible, 
+% abbrv to have the same but shorter
+\bibliography{/home/jbarbay/OnGoing/WebSite/Studies/ScientificArticles/biblio-Barbay,/home/jbarbay/OnGoing/WebSite/Publications/publications-Barbay}
+
+
+% \appendix
+
+% \section{Preliminary Results}
+% \label{sec:preliminaryResults}
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

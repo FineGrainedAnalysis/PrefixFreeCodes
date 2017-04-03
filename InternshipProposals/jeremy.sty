@@ -1,0 +1,305 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%** LaTeX version needed:
+\NeedsTeXFormat{LaTeX2e}
+%** Package provided:
+\ProvidesPackage{jeremy}
+\typeout{List of packages and general macros that I always use.}
+
+%* Package dependancies:  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%** Version for {INUTILE} {FORCOAUTHORS}  and many other environments
+\RequirePackage{versions}
+\excludeversion{INUTILE}
+\includeversion{LONG}
+\includeversion{EXAMPLE}
+\excludeversion{TODO}
+\markversion{ESPANOL}\markversion{ENGLISH}\markversion{FRANCAIS}
+
+%** For figures:
+\RequirePackage{epsf}
+\RequirePackage{epsfig} %\input{psfig}           % Capability to place postscript drawing
+\RequirePackage{graphicx}
+
+%** Fonts:
+\RequirePackage{amsfonts,amsmath,amssymb}  %% For special mathematical characters.
+\RequirePackage[T1]{fontenc} %% To be able to type accents directly in the text, rather than through LaTeX commands.
+
+%** For Defining new theorems and so on.
+\RequirePackage{theorem}
+
+%** To draw 
+\RequirePackage{graphicx} %% To include graphics
+%\RequirePackage{tree-dvips}   % To draw arrows, using ``\node{Na}{Aschtung}\anodeconnect[bl]{Na}[tr]{Na}''
+%\RequirePackage{qtree} \qtreecenterfalse  % To draw trees, using ``\Tree [ .1 2 3 ]''.
+
+%** For the Biblio
+%\RequirePackage[sort]{natbib} % To have the references sorted in good order.
+%\renewcommand{\bibsection}{\vspace{.5cm}{\bf Bibliography}}  % To cancel the \newpage of natbib.
+%** To write algorithms
+% \RequirePackage{algorithmic}%% For the Algorithms.
+% \RequirePackage{algorithm} %% For the floating Algorithm environment.
+%** To include source directly
+\RequirePackage{verbatim}   % to include a file with \verbatiminput{}
+
+%** To include \urls and produce links in the pdf produced
+%\usepackage[bookmarks,colorlinks=false,bookmarksopen,bookmarksdepth=2, pdfauthor={J\'er\'emy Barbay}]{hyperref}
+
+% %** To move proofs to the appendix easily
+% \RequirePackage{answers}
+% \Newassociation{mproof}{MovedProof}{movedProofs}
+% \renewenvironment{MovedProof}[1]{\begin{proof}}{\end{proof}}
+
+
+%* Variables  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%** Modifying LaTeX's behaviour:
+% Do away with "club lines" (the first line of a paragraph on the last line of a page; also called "orphan lines") 
+% and "widow lines" (the last line of the paragraph on a new page): 
+% \widowpenalty=10000   
+% \clubpenalty=10000
+% \flushbottom
+% \sloppy
+
+%* Commands and Environments:  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%** Macros from JeffreyScottVitter
+% Write multichar identifier names using \id in either mathmode or text;
+% For ex, $\id{high}(x)$ is an expression using the \id{high} function.
+% Use ``\ '' if a space is desired, as in math mode.
+\providecommand{\id}[1]{\ensuremath{\mathit{#1}}}
+\let\idit=\id
+\providecommand{\idbf}[1]{\ensuremath{\mathbf{#1}}}
+\providecommand{\idrm}[1]{\ensuremath{\mathrm{#1}}}
+\providecommand{\idtt}[1]{\ensuremath{\mathtt{#1}}}
+\providecommand{\idsf}[1]{\ensuremath{\mathsf{#1}}}
+\providecommand{\idcal}[1]{\ensuremath{\mathcal{#1}}}  % Use with capital letter args only
+
+
+%** Something to reduce the space at the head of an itemize or enumerate: 
+%\providecommand{\compress}{\vspace{-8pt}}
+%\addtolength{\topsep}{-15mm}  %\topsep: space between first item and preceding paragraph.
+%\partopsep: extra space added to \topsep when environment starts a new paragraph.
+%\itemsep: space between successive items.
+
+%\newenvironment{homework}{{\bf Homework:}}{}
+%\renewenvironment{openProblem}{{\bf Open Problem:}}{}
+%\newenvironment{solution}{{\bf Solution:}}{}
+%\newenvironment{}{}{}
+\markversion{interaction}
+
+% Mathematical notations that I always use:
+\DeclareMathOperator{\llgOP}{llg}
+\DeclareMathOperator{\lllgOP}{lllg}
+\DeclareMathOperator{\llglllgOP}{llglllg}
+\providecommand{\llg}{\ensuremath{\lg\lg}}
+\providecommand{\lllg}{\ensuremath{\lg\lg\lg}}
+\providecommand{\llglllg}[1]{\ensuremath{\llg{#1}\lllg{#1}}}
+%\providecommand{\}{{\ensuremath }}
+
+% Put the following in your article to enforce the notations you want.
+% \renewcommand{\llg}{\ensuremath{\llgOP}}
+% \renewcommand{\lllg}{\ensuremath{\lllgOP}}
+% \renewcommand{\llglllg}[1]{\ensuremath{\llglllgOP{#1}}}
+
+
+
+%** Useful symbols:
+\providecommand{\bigo}{{\cal O}} 
+\providecommand{\Oh}{\bigo}
+\providecommand{\lito}{{o}}
+%\providecommand{\mod}{\ensuremath{\mbox{ mod }}}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\polylog}{polylg}
+
+%** Useful commands:
+\providecommand{\etal}{{\em et al.}}
+\providecommand{\acknowledgements}{\acknowledgement}
+\providecommand{\acknowledgement}{\medskip\noindent{\bf Acknowledgements:~}}
+\providecommand{\define}[1]{\textem{#1}} % So that definitions can be made more visible by overdefining this command.
+
+
+
+%* Notations for papers
+
+% Having a macro for a concept ensures that the notations are uniform
+% accross the paper, and that one can easily change the notations for
+% a given concept if it conflicts with the notations of another one.
+
+%%% Problem names
+\providecommand{\lrm}{Left-to-Right-Minima}  % the spelled-out name for LRM (taken from Sada/Gonzalo)
+\providecommand{\multiset}{\ensuremath{\pi}}
+\providecommand{\rmq}{\ensuremath{\text{\sc rmq}}}
+\providecommand{\lca}{\ensuremath{\text{\sc lca}}}
+\providecommand{\psv}{\ensuremath{\text{\sc psv}}}
+
+
+%% Variables related to Succinct Data Structures
+%% General
+\providecommand{\entropy}{{\ensuremath\cal H}}
+\providecommand{\treeEntropy}{{\ensuremath\cal H^*}}
+\providecommand{\gap}{{\ensuremath\cal G}} % {{\ensuremath\idtt{gap}}}
+
+
+%% On Strings
+%%%% binary Strings
+\providecommand\BinRank{\idtt{bin\_rank}}
+\providecommand\BinSelect{\idtt{bin\_select}}
+\providecommand\binRank{\BinRank}
+\providecommand\binSelect{\BinSelect}
+%%%% on larger alphabet
+\providecommand{\alphabetSize}{{\ensuremath\sigma}}
+\providecommand\StrSpace{\ensuremath{          \nbobjects   \left( \lg\nblabels   + o(\lg\nblabels)     \right)     }}
+\providecommand\StrTime{\ensuremath{               \bigo(\lg\lg\nblabels)}}
+\providecommand\StrRank{\idtt{string\_rank}}
+\providecommand\StrSelect{\idtt{string\_select}}
+\providecommand\StrAccess{\idtt{string\_access}}
+\providecommand\StrNB{\idtt{string\_nb}}
+%*** For Binary Relations
+\providecommand{\nbLabels}{{\ensuremath\sigma}}
+\providecommand{\nbObjects}{{\ensuremath n}}
+\providecommand{\nbPairs}{{\ensuremath t}}
+%%%% Our operators on binary relations
+\providecommand\LabNb{\idtt{label\_nb}}
+\providecommand\LabMin{\idtt{label\_min}}
+\providecommand\LabMax{\idtt{label\_max}}
+\providecommand\LabRank{\idtt{label\_rank}}
+\providecommand\LabSelect{\idtt{label\_select}}
+\providecommand\LabAccess{\idtt{label\_access}}
+%
+\providecommand\ObjNb{\idtt{object\_nb}}
+\providecommand\ObjMin{\idtt{object\_min}}
+\providecommand\ObjMax{\idtt{object\_max}}
+\providecommand\ObjRank{\idtt{object\_rank}}
+\providecommand\ObjSelect{\idtt{object\_select}}
+\providecommand\ObjAccess{\idtt{object\_access}}
+%
+\providecommand\RelNb{\idtt{relation\_nb}}
+\providecommand\RelAccess{\idtt{relation\_access}}
+\providecommand\RelRank{\idtt{relation\_rank}}
+\providecommand\RelSelect{\idtt{relation\_select}}
+
+\providecommand\RelRankByObjectFirst{\idtt{relation\_rank\_by\_object\_first}}
+\providecommand\RelRankByLabelFirst{\idtt{relation\_rank\_by\_label\_first}}
+\providecommand\RelSelectByObjectFirst{\idtt{relation\_select\_by\_object\_first}}
+\providecommand\RelSelectByLabelFirst{\idtt{relation\_select\_by\_label\_first}}
+
+%**** For Wavelet Trees
+\providecommand{\rightBranch}{{\ensuremath \idtt{rb}}}
+\providecommand{\leftBranch}{{\ensuremath \idtt{lb}}}
+\providecommand{\complementRightBranch}{{\ensuremath \overline{\idtt{rb}}}}
+
+%% On Unlabeled Trees
+%%%% Munro and Raman~\cite{succinctRepresentationsOfBalancedParenthesis}
+\def\TrParent{\idtt{tree\_parent}}
+\def\TrDegree{\idtt{tree\_degree}}
+\def\TrNbChildren{\TrDegree}
+\def\TrNbDesc{\idtt{tree\_nbdesc}}
+%%%% Benoit et al. on unlabeled trees
+\def\TrChild{\idtt{child}}
+%%%% Geary et al on unlabeled trees
+%\def\TrChildRank{\idtt{childrank}}
+\def\TrDepth{\idtt{depth}}
+\def\TrLevAnc{\idtt{level\_anc}}
+\def\TrRank{\idtt{tree\_rank}}
+\def\TrSelect{\idtt{tree\_select}}
+\def\TrChildRank{\idtt{child\_rank}}
+\def\TrDeg{\idtt{degree}}
+\def\TrNbDesc{\idtt{nbdesc}}
+%%%% The ones I added:
+\def\TrIsAnc{\idtt{tree\_isanc}}
+%%%% Sadakane
+\def\LCA{\idtt{LCA}}
+
+%*** For Labeled Trees
+\providecommand\LabTreeAnc{\idtt{labeltree\_anc}}
+\providecommand\LabTreeDesc{\idtt{labeltree\_desc}}
+\providecommand\LabTreeParent{\idtt{labeltree\_parent}}
+\providecommand\LabTreeChild{\idtt{labeltree\_child}}
+\providecommand\LabTreeNbDesc{\idtt{labeltree\_nbdesc}}
+\providecommand\LabTreeNbChildren{\idtt{labeltree\_nbchildren}}
+%*** For Labeled Planar Graphs
+%**** For Vertex Labeled Planar Graphs
+\providecommand{\LabNeighborDegree}{{\ensuremath \idtt{label\_neighbor\_nb}}}
+\providecommand{\LabNeighborRank}{{\ensuremath \idtt{label\_neighbor\_rank}}}
+\providecommand{\LabNeighborSelect}{{\ensuremath \idtt{label\_neighbor\_select}}}
+%**** For Edge Labeled Planar Graphs
+\providecommand{\LabIncidentDegree}{{\ensuremath \idtt{label\_incident\_nb}}}
+\providecommand{\LabIncidentRank}{{\ensuremath \idtt{label\_incident\_rank}}}
+\providecommand{\LabIncidentSelect}{{\ensuremath \idtt{label\_incident\_select}}}
+
+
+%** Variables related to adaptive analysis
+\providecommand{\partitionSize}{{\ensuremath\delta}}
+\providecommand{\difficulty}{\partitionSize}
+\providecommand{\instance}{{\ensuremath I}}
+\providecommand{\randomizedAlgorithm}{{\ensuremath R}}
+
+%*** For Computational Geometry
+\providecommand{\nbPoints}{{\ensuremath n}}
+\providecommand{\nbPointsBis}{{\ensuremath m}}
+\providecommand{\outputSize}{{\ensuremath h}}
+\providecommand{\verticalLine}{{\ensuremath l}}
+\providecommand{\eliminatorLine}{{\ensuremath l}}
+
+
+%****  For Convex Hull
+\providecommand{\nbHulls}{{\ensuremath k}}
+\providecommand{\nbFaces}{{\ensuremath F}}
+\providecommand{\CHFace}{{\ensuremath f}}
+\providecommand{\hull}{{\ensuremath A}}
+\providecommand{\hullBis}{{\ensuremath B}}
+\providecommand{\Invp}{{\idtt{Inv'}}}
+\providecommand{\Runsp}{{\idtt{Runs'}}}
+\providecommand{\locality}{{\ensuremath\lambda}}
+\providecommand{\nbSimpleSubchains}{{\ensuremath\chi}}
+\providecommand{\nbSelfIntersectingPoints}{{\ensuremath\kappa}}
+\providecommand{\repartition}{{\idtt{Rep}}}
+\providecommand{\partitionEntropy}{{\ensuremath\entropy^*}}
+\providecommand{\structuralEntropy}{{\ensuremath\entropy^*}}
+
+%**** For Instance Optimality
+%\providecommand{\PiVert}{\Pi_{\mbox{\scriptsize vert}}}
+%\providecommand{\OPT}{\mbox{\rm OPT}}
+%\providecommand{\avg}{^{\mbox{\scriptsize\rm avg}}}
+
+
+%*** For Intersection Problems
+\providecommand{\threshold}{{\ensuremath t}}
+
+
+%%%% For Concepts 
+\providecommand{\abstractDataType}{\ensuremath{{\cal T}}}
+\providecommand\fvect[1]{\ensuremath\langle#1\rangle}
+\providecommand\run[1]{\ensuremath(#1)}
+\providecommand\permutation[1]{\ensuremath(#1)}
+\providecommand\partition[1]{\ensuremath\{#1\}}
+
+
+%%%% Def of problems
+\providecommand\wordSize{\ensuremath{w}}
+\providecommand\nbobjects{\ensuremath{n}}
+\providecommand\nbnodes{\ensuremath{n}}
+\providecommand\nblabels{\ensuremath{\sigma}}
+\providecommand\nbrels{\ensuremath{t}}
+\providecommand\nbkeywords{\ensuremath{k}}
+\providecommand\threshold{\ensuremath{t}}
+\providecommand\difficulty{\ensuremath{\delta}}
+\providecommand\recursivity{\ensuremath{\rho}}
+\providecommand\lab{\alpha}
+\providecommand\labelx{\alpha}
+\providecommand\labely{\beta}
+\providecommand\labelz{\gamma}
+\providecommand\labelzz{\delta}
+\providecommand\object{x}
+\providecommand\objectx{x}
+\providecommand\objecty{y}
+\providecommand\objectz{z}
+\providecommand\nodex{v}
+\providecommand\nodey{w}
+\providecommand\nodez{u}
+\providecommand\leftBound{z}
+\providecommand\rank{r}
+\providecommand\axis{\delta}
+\providecommand\plane{\Delta}
+%%%% Orders
+\providecommand\DFUDS{\idtt{DFUDS}}
+\providecommand\pre{\idtt{PRE}}
+\providecommand\post{\idtt{POST}}
