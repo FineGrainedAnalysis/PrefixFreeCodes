@@ -26,7 +26,7 @@
     6. [X] Propose a new algorithm when the weights are not sorted
 *** Calendar
     - Main work  [2015-12-01 Tue]-[2016-03-01 Tue]
-    - CPM 2016
+    - [[https://faculty.biu.ac.il/~cpm2016/][CPM 2016]]
       - Abstract Submission <2016-01-21 Thu>
       - Full paper submission <2016-01-28 Thu>
       - Acceptation [2016-03-14 Mon]
