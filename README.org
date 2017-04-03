@@ -1,9 +1,47 @@
-# PrefixFreeCodes
-Implementation of Algorithms to Compute Optimal Prefix Free Codes (and Variants), and of programs to evaluate their relative performances.
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t c:nil creator:comment d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t timestamp:t toc:t todo:t |:t
+#+TITLE: Adaptive Computation of Optimal Prefix Free Codes
+#+DATE: <2017-04-03 Mon>
+#+AUTHOR: Jérémy Barbay
+#+EMAIL: jeremy@barbay.cl
+#+DESCRIPTION: Sources of Articles and Programs related to the study of the Adaptive Computation of Optimal Prefix Free Codes.
+#+KEYWORDS: Huffman, van Leeuwen, Adaptive.
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 24.4.1 (Org mode 8.2.5h)
 
-* Objectives
-  1. Algorithms to generate datasets relative to text and image compression via Optimal Prefix Free Codes
-  2. Standard Algorithms of computation of optimal prefix free codes
-  3. At least one new algorithm of computation of optimal prefix free codes.
-  
-* Prospective Calendar
+* Objectives / Hypothesis [1/4]
+  1. [X] SHOW that computing =Optimal Prefix Free Codes= is less costly than =Sorting Multisets= for large classes of instances, even though in the worst case over instances of fixed size their complexity is the same;
+  2. [ ] EVALUATE how much this matters on real instances;
+  3. [ ] DETERMINE the optimal computational complexity of computing =Optimal Prefix Free Codes=  in the algebraic decision tree model  (hopefully by giving an instance optimal algorithm).
+  3. [ ] DETERMINE the optimal computational complexity of computing =Optimal Prefix Free Codes=  in the RAM computational model.
+* Works
+** Study by Jeremy Barbay [2016-02-01 Mon]-[2016-03-01 Tue]
+*** Initial Objectives ([4/6] fulfilled)
+    1. [X] Refine the analysis of the algorithm suggested by Huffman when the weights are not sorted
+    2. [X] Refine the analysis of van Leeuwen's algorithm when the weights are sorted
+    3. [X] Introduce new measure of difficulty for the computation of Optimal Free Codes
+    4. [ ] Control the validity of the results from Belal and Elmasry
+    5. [ ] Propose a new algorithm when the weights are sorted
+    6. [X] Propose a new algorithm when the weights are not sorted
+*** Calendar
+    - Main work  [2015-12-01 Tue]-[2016-03-01 Tue]
+    - CPM 2016
+      - Abstract Submission <2016-01-21 Thu>
+      - Full paper submission <2016-01-28 Thu>
+      - Acceptation [2016-03-14 Mon]
+      - Final Submission [2016-04-03 Sun]
+      - Presentation [2016-06-27 Mon]-[2016-06-29 Wed]
+    - Journal version?
+*** Results
+    1. New measure of difficulty, the =alternation= $\alpha$, for the computation of Optimal Free Codes.
+    2. New algorithm, optimally adaptive in the worst case over instances of fixed size and alternation, for output alphabet size $B=2$.
+*** Conclusions and Perspectives
+    1. Validity of results from Belal and Elmasry [STACS 2006] still not confirmed or infirmed
+    2. Gap in the analysis: the weight of mixed nodes is systematically computed, when some instances do not require it.
+    3. Generalization to larger output alphabets $B>2$
+** Trabajo Dirigido Esteban Cifuentes [2017-04-03 Mon]-[2017-06-30 Fri]
+*** Objectives
+*** Calendar
+*** Results
+*** Conclusions
