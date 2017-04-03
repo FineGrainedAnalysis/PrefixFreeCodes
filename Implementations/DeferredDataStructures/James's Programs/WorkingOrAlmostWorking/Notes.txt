@@ -1,0 +1,11 @@
+Finished Program with the exception of a faulty Interpolation Search.
+Binary Search is the default so the program can run as is.
+
+The program is set up completely so that no changes need to be made internally.
+Allows for Element and Querry Distributions of Uniform, Normal and Clumped.
+
+Clumped Method distribution is based on a "Number of Clumps" Parameter and whether
+the elements should be in evenly distributed clumps or normally distributed clumps.
+
+*Program prompts is Array Doubling used, but I defaulted to yes in the Insert Delete Calls
+as inserts will not work without Array Doubling.
